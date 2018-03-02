@@ -177,14 +177,14 @@ public class SM2Utils
 //	public static void main(String[] args) throws Exception
 	public static void testSm2() throws Exception
 	{
-		String plainText = "message digest";
+		String plainText = "HelloWorld";
 		byte[] sourceData = plainText.getBytes();
 		
 		// 1 用SM2 实现签名
 		String privateKey = "128B2FA8BD433C6C068C8D803DFF79792A519A55171B1B650C23661D15897263";
 		String privatekeyStr = new String(Base64.encode(Util.hexToByte(privateKey)));
 
-		String userId = "ALICE123@YAHOO.COM";
+		String userId = "lee@deepin.com";
 		byte[] c = SM2Utils.sign(userId.getBytes(), Base64.decode(privatekeyStr.getBytes()), sourceData);
 		String pubkey = "040AE4C7798AA0F119471BEE11825BE46202BB79E2A5844495E97C04FF4DF2548A7C0240F88F1CD4E16352A73C17B7F16F07353E53A176D684A9FE0C6BB798E857";
 		String pubkeyStr = new String(Base64.encode(Util.hexToByte(pubkey)));
@@ -203,7 +203,7 @@ public class SM2Utils
 		Log.i("leeTest------>","\n\n2 ---------------------------------------");
 		byte[] cipherText = SM2Utils.encrypt(Base64.decode(pubkeyStr.getBytes()), sourceData);
 
-		Log.i("leeTest------>","cipherText = " + cipherText);
+		Log.i("leeTest------>","cipherText = " + Util.getHexString(cipherText));
 		plainText = new String(SM2Utils.decrypt(Base64.decode(privatekeyStr.getBytes()), cipherText));
 		Log.i("leeTest------>","plainText = " + plainText);
 		Log.i("leeTest------>","\n\nEnd ---------------------------------------");
